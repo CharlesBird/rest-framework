@@ -79,7 +79,8 @@ def wrapJsonException(exception, include_description=False, extra_info=None):
 
     def get_headers(environ=None):
         """Get a list of headers."""
-        _headers = [("Content-Type", "application/json")]
+        _headers = [("Content-Type", "application/json"), ("Access-Control-Allow-Origin", "*"),
+                    ("Access-Control-Allow-Methods", environ.get("REQUEST_METHOD", "POST, GET"))]
         for key, value in get_original_headers(environ=environ):
             if key != "Content-Type":
                 _headers.append(key, value)
